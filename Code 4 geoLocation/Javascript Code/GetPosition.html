@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Get the Location</title>
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+   crossorigin=""/>
+   
+
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script type="text/javascript">
+
+function getLocation(){
+
+   if (navigator.geolocation){
+
+   navigator.geolocation.getCurrentPosition(successfulPosition);
+
+}
+
+else
+
+   document.getElementById("result").innerHTML = "Your browser does not support HTML5 Geolocation";
+
+}
+
+function successfulPosition(location){
+
+   var lat = location.coords.latitude;
+
+   var long = location.coords.longitude;
+
+  var map = L.map('map').setView([lat, long], 13);
+
+        // add an OpenStreetMap tile layer
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', 
+             attributionControl = false
+        ).addTo(map);
+
+/*document.getElementById("result").innerHTML = "Altitude: " + location.coords.altitude;
+
+document.getElementById("result").innerHTML = "Accuracy: " + location.coords.accuracy;
+
+document.getElementById("result").innerHTML = "Altitude Accuracy: " + location.coords.altitudeAccuracy;
+
+document.getElementById("result").innerHTML = "Direction: " + location.coords.heading;
+
+document.getElementById("result").innerHTML = "Speed: " + location.coords.speed;
+
+document.getElementById("result").innerHTML = "Time: " + location.timestamp;
+*/
+}
+
+</script>
+<script>
+getLocation();
+</script>
+
+<button id="getPosition" onclick="getLocation();">Get Position</button>
+
+</body>
+
+</html>
